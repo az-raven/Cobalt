@@ -19,9 +19,6 @@ iso: kernel ensure_out_dir
 run:
 	qemu-system-x86_64 -drive file=build/must.iso,format=raw,index=0,media=disk
 
-# link: asm kernel drivers ensure_out_dir
-# 	$(LD) -T linker.ld -o build/hn_demo.bin $(OBJS) $(CFLAGS)
-
 kernel: ensure_out_dir asm drivers
 	$(CXX) -T linker.ld src/kernel.cpp $(OBJS) -o build/kernel $(CFLAGS)
 
