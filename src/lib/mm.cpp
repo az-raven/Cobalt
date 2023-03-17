@@ -28,6 +28,7 @@ typedef struct _Allocation {
 static uint8_t kheap[HACKNET_KHEAP_SIZE];
 
 /// @brief Iniitalizes the kernel heap to a static size of HACKNET_KHEAP_SIZE.
+[[deprecated]]
 void kheap_init() {
 
     Allocation *base = (Allocation *)kheap;
@@ -83,6 +84,7 @@ static Allocation *find_first_minimal_entry(size_t min_size) {
 /// @brief Allocates a block of kernel memory of `size` bytes or larger.
 /// @param size The minimum size -in bytes- of memory that must be allocated.
 /// @return A pointer to the beginning of the block, or NULL if the memory cannot be allocated.
+[[deprecated]]
 void *kmalloc(size_t size) {
     Allocation *a = find_first_minimal_entry(size);
 
@@ -120,6 +122,7 @@ void *kmalloc(size_t size) {
 /// @param alignment The alignment you need.
 /// @param free_handle A pointer to a variable you can use to free this memory.
 /// @return The aligned pointer.
+[[deprecated]]
 void *kmalloc_aligned(size_t size, size_t align_to, void **free_handle) {
     void *ptr = kmalloc(size + align_to);
     size_t offset = ((size_t)ptr) % align_to;
@@ -127,6 +130,7 @@ void *kmalloc_aligned(size_t size, size_t align_to, void **free_handle) {
     return (void *)(((size_t)ptr) + offset);
 }
 
+[[deprecated]]
 void kfree(void *ptr) {
     Allocation *base = (Allocation *)kheap;
 
