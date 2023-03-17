@@ -32,7 +32,7 @@ void __stack_chk_fail(void) {
     serial_writestring("2...\n\r");
     io_wait_long();
     serial_writestring("1...\n\r");
-    serial_writestring("!! RESTARTING HACKNET KERNEL NOW !!\n\r");
+    serial_writestring("!! RESTARTING MUST KERNEL NOW !!\n\r");
 
     io_wait_long();
 
