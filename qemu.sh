@@ -1,1 +1,0 @@
-qemu-system-i386 -cdrom build/hn_demo.iso

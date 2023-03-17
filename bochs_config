@@ -1,5 +1,0 @@
-megs: 128
-ata0-master: type=cdrom, path="C:\Projects\C Projects\hn_demo\build\hn_demo.iso", status=inserted
-boot: cdrom
-mouse: enabled=0
-display_library: win32, options="gui_debug"
