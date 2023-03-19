@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-namespace must {
+namespace cobalt {
 	bool verify_kernel_data_address(void *address) {
 		// Kernel data starts at 3GiB.
 		// Kernel data ends at 4GiB.

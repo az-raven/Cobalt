@@ -1,6 +1,8 @@
+#pragma once
+
 #include "serial.h"
 
-namespace must {
+namespace cobalt {
 	class SerialPort {
 		public:
 			static Maybe<SerialPort> create(uint16_t base) {

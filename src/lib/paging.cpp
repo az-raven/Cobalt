@@ -1,13 +1,10 @@
-#ifndef LIB_HACKNET_PAGING
-#define LIB_HACKNET_PAGING
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
 
 #include "mm.cpp"
 #include "gdt.cpp"
-
-#define HIGHER_HALF_BOUNDARY 0x7FFFFFFF
 
 extern "C" void load_page_directory(uint32_t *);
 extern "C" void enable_paging();
@@ -41,5 +38,3 @@ void paging_init() {
 
     serial_writestring("[PAGING] No bootloop? Cool! CS refreshed successfully!\n\r");
 }
-
-#endif

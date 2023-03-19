@@ -1,5 +1,4 @@
-#ifndef LIB_HACKNET_IRQ
-#define LIB_HACKNET_IRQ
+#pragma once
 
 #include <stdint.h>
 
@@ -183,5 +182,3 @@ void idt_init() {
 
     serial_writestring("[IRQ] Interrupts enabled.\n\r");
 }
-
-#endif

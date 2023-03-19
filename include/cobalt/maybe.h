@@ -1,9 +1,11 @@
+#pragma once
+
 #include <stdint.h>
 #include <stdbool.h>
 
 #include "inline.h"
 
-namespace must {
+namespace cobalt {
 	template<typename T>
 	class Maybe {
 		public:
@@ -62,4 +64,4 @@ namespace must {
 			T value;
 			bool tag;
 	};
-} // namespace must
+} // namespace cobalt

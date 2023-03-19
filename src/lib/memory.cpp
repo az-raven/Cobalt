@@ -1,11 +1,8 @@
-#ifndef LIB_HACKNET_MEMORY
-#define LIB_HACKNET_MEMORY
+#pragma once
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
-
-
 
 /// @brief Performs a byte-by-byte comparison of two buffers.
 /// @param a The LHS buffer.
@@ -68,5 +65,3 @@ void* memset(void* a, int value, size_t size) {
 
     return a;
 }
-
-#endif

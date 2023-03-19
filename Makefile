@@ -14,10 +14,10 @@ iso: kernel ensure_out_dir
 	mkdir -p build/isodir/boot/grub
 	cp build/kernel build/isodir/boot/kernel
 	cp grub.cfg build/isodir/boot/grub/grub.cfg
-	grub-mkrescue -o build/must.iso build/isodir
+	grub-mkrescue -o build/cobalt.iso build/isodir
 
 run:
-	qemu-system-x86_64 -drive file=build/must.iso,format=raw,index=0,media=disk
+	qemu-system-x86_64 -drive file=build/cobalt.iso,format=raw,index=0,media=disk
 
 kernel: ensure_out_dir asm drivers
 	$(CXX) -T linker.ld src/kernel.cpp $(OBJS) -o build/kernel $(CFLAGS)

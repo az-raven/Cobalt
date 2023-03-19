@@ -1,8 +1,5 @@
-#ifndef LIB_MUST_MALLOC
-#define LIB_MUST_MALLOC 1
+#pragma once
 
 #include <stddef.h>
 
 void *malloc(size_t size);
-
-#endif

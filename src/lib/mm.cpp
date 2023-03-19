@@ -1,7 +1,4 @@
-#ifndef LIB_HACKNET_MM
-#define LIB_HACKNET_MM
-
-#define HACKNET_MM_DEBUG false
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -23,11 +20,11 @@ typedef struct _Allocation {
     void *base;
 } Allocation;
 
-#define HACKNET_KHEAP_SIZE 0x100000
+#define COBALT_KHEAP_SIZE_DEPRECATED 0x100000
 
-static uint8_t kheap[HACKNET_KHEAP_SIZE];
+static uint8_t kheap[COBALT_KHEAP_SIZE_DEPRECATED];
 
-/// @brief Iniitalizes the kernel heap to a static size of HACKNET_KHEAP_SIZE.
+/// @brief Iniitalizes the kernel heap to a static size of COBALT_KHEAP_SIZE_DEPRECATED.
 [[deprecated]]
 void kheap_init() {
 
@@ -35,7 +32,7 @@ void kheap_init() {
 
     base->base = kheap + sizeof(Allocation);
     base->free = true;
-    base->length = HACKNET_KHEAP_SIZE - sizeof(Allocation);
+    base->length = COBALT_KHEAP_SIZE_DEPRECATED - sizeof(Allocation);
     base->previous = NULL;
     base->next = NULL;
 }
@@ -152,4 +149,3 @@ void kfree(void *ptr) {
         current = current->next;
     }
 }
-#endif

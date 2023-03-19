@@ -1,5 +1,4 @@
-#ifndef HACKNET_KERNEL_SEC
-#define HACKNET_KERNEL_SEC
+#pragma once
 
 #include <stdint.h>
 
@@ -32,12 +31,10 @@ void __stack_chk_fail(void) {
     serial_writestring("2...\n\r");
     io_wait_long();
     serial_writestring("1...\n\r");
-    serial_writestring("!! RESTARTING MUST KERNEL NOW !!\n\r");
+    serial_writestring("!! RESTARTING COBALT KERNEL NOW !!\n\r");
 
     io_wait_long();
 
     __asm__ volatile("ljmp 0x0");
     while(true);
 }
-
-#endif

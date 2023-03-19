@@ -2,9 +2,9 @@
 
 #include <stdint.h>
 
-#include "../must/maybe.h"
+#include "../cobalt/maybe.h"
 
-namespace must {
+namespace cobalt {
 	class SerialPort {
 		public:
 			/// @brief Creates a new serial port, initializes it, and tests it.

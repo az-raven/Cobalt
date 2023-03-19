@@ -1,5 +1,4 @@
-#ifndef LIB_HACKNET_SERIAL
-#define LIB_HACKNET_SERIAL
+#pragma once
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -55,5 +54,3 @@ void serial_writestring(const char *message) {
         write_serial(message[i]);
     }
 }
-
-#endif

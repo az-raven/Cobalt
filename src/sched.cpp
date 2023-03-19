@@ -1,5 +1,4 @@
-#ifndef HACKNET_SCHED
-#define HACKNET_SCHED
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
@@ -17,5 +16,3 @@ void sched_tick_irq(void) {
     // TODO
     eoi(0);
 }
-
-#endif

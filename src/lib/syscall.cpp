@@ -1,5 +1,4 @@
-#ifndef LIB_HACKNET_SYSCALL
-#define LIB_HACKNET_SYSCALL
+#pragma once
 
 #include <stdint.h>
 
@@ -293,5 +292,3 @@ extern "C" errno_t syscall(
     eoi(0x80);
     return EINVAL;
 }
-
-#endif

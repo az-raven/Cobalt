@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include "must/maybe.h"
-#include "must/verify.h"
+#include "cobalt/maybe.h"
+#include "cobalt/verify.h"
 
-namespace must {
+namespace cobalt {
 	/// @brief Used for managing allocations internally.
 	typedef struct _Allocation {
 		size_t 	size;

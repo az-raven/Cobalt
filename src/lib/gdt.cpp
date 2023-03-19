@@ -1,5 +1,4 @@
-#ifndef LIB_HACKNET_GDT
-#define LIB_HACKNET_GDT
+#pragma once
 
 #include "serial.cpp"
 
@@ -55,5 +54,3 @@ void gdt_init() {
 
     serial_writestring("[GDT] No bootloop? Cool! CS refreshed successfully!\n\r");
 }
-
-#endif
