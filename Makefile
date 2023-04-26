@@ -1,14 +1,13 @@
-CFLAGS = 	-ffreestanding -Wall -Wextra -fstack-protector \
-			-fstack-protector-strong -fstack-protector-all \
+CFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -Ofast -lgcc \
-			-Iinclude -pedantic
+			-Isrc -pedantic
 
-OBJS = build/boot.o build/libpaging.o build/libgdt.o build/libirq.o build/libsyscall.o
+OBJS = build/boot.o
 
-CXX = i686-elf-g++
-CC = i686-elf-gcc
-LD = i686-elf-gcc
-AS = i686-elf-as
+CXX = x86_64-elf-g++
+CC = x86_64-elf-gcc
+LD = x86_64-elf-gcc
+AS = x86_64-elf-as
 
 iso: kernel ensure_out_dir
 	mkdir -p build/isodir/boot/grub
@@ -19,20 +18,11 @@ iso: kernel ensure_out_dir
 run:
 	qemu-system-x86_64 -drive file=build/cobalt.iso,format=raw,index=0,media=disk
 
-kernel: ensure_out_dir asm drivers
+kernel: ensure_out_dir asm
 	$(CXX) -T linker.ld src/kernel.cpp $(OBJS) -o build/kernel $(CFLAGS)
 
 asm: ensure_out_dir
-	$(AS) src/boot.s -o build/boot.o
-	$(AS) src/lib/paging.S -o build/libpaging.o
-	$(AS) src/lib/gdt.S -o build/libgdt.o
-	$(AS) src/lib/irq.S -o build/libirq.o
-	$(AS) src/lib/syscall.S -o build/libsyscall.o
-
-lib%.o: %.s
-	$(AS) src/
-
-drivers:
+	$(AS) src/arch/boot.s -o build/boot.o
 
 ensure_out_dir:
 	mkdir -p build
