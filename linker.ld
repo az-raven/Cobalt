@@ -35,6 +35,7 @@ SECTIONS
 	.bss BLOCK(4K) : ALIGN(4K)
 	{
 		*(COMMON)
+		*(.init_only)
 		*(.bss)
 	}
  
