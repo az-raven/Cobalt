@@ -26,3 +26,8 @@ _x86_64_long_mode:
     Set the size of `_start` for debugging and stack traces.
 */
 .size _start, . - _start
+
+.section .init_only
+.align 4096
+page_directory_init:
+    .skip 
