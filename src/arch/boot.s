@@ -1,6 +1,3 @@
-// TODO: aarch64/x86_32 support
-.set ARCH_X86_64, 1
-
 /* Constants for the multiboot header. */
 .set ALIGN,     1<<0                    /* align loaded modules on page boundaries */
 .set MEMINFO,   1<<1                    /* provide memory map */
@@ -34,6 +31,10 @@ stack_bottom:
 .skip 16384     # 16 KiB
 stack_top:
 
-.ifdef ARCH_X86_64
-.include "src/arch/i686/boot.s"
-.endif
+#ifdef ARCH_x86_64
+#include "src/arch/x86_64/boot.s"
+#endif
+
+#ifdef ARCH_i686
+#include "src/arch/i686/boot.s"
+#endif
