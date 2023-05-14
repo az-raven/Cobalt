@@ -1,13 +1,16 @@
+TARGET = x86_64
+
 CFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -Ofast -lgcc \
-			-Isrc -pedantic
+			-Isrc -pedantic \
+			-D ARCH_$(TARGET) 
 
 OBJS = build/boot.o
 
-CXX = x86_64-elf-g++
-CC = x86_64-elf-gcc
-LD = x86_64-elf-gcc
-AS = x86_64-elf-as
+CXX = $(TARGET)-elf-g++
+CC = $(TARGET)-elf-gcc
+LD = $(TARGET)-elf-gcc
+AS = $(TARGET)-elf-as
 
 iso: kernel ensure_out_dir
 	mkdir -p build/isodir/boot/grub
@@ -22,7 +25,7 @@ kernel: ensure_out_dir asm
 	$(CXX) -T linker.ld src/kernel.cpp $(OBJS) -o build/kernel $(CFLAGS)
 
 asm: ensure_out_dir
-	$(AS) src/arch/boot.s -o build/boot.o
+	$(CC) -c src/arch/boot.s -o build/boot.o $(CFLAGS)
 
 ensure_out_dir:
 	mkdir -p build
