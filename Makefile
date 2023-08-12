@@ -30,7 +30,10 @@ complete: toolchain kernel image
 	echo "Starting complete rebuild..."
 
 run:
-	qemu-system-x86_64 -drive format=raw,file=build/cobalt.img -d int
+	qemu-system-x86_64 -drive format=raw,file=build/cobalt.img
+
+bochs:
+	bochs
 
 install:
 	# "WARNING: This automated LOCAL installation requires both a very specific system configuration and root access."

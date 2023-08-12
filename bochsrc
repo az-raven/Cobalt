@@ -1,0 +1,12 @@
+cpu: count=1, reset_on_triple_fault=0
+display_library: x, options="gui_debug"
+
+megs: 512
+ata0-master: type=disk, path="build/cobalt.img", mode=flat
+clock: sync=realtime, time0=local
+boot: c
+
+log: ./build/bochs.log
+
+mouse: enabled=0
+magic_break: enabled=1
