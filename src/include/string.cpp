@@ -71,7 +71,7 @@ void *memset(void *dest, int c, size_t remaining_bytes) {
 
 	for (size_t i = 0; i < qwords; i++)
 	{
-		((uint64_t *)dest_bytes)[i] = dword;
+		((uint64_t *)dest_bytes)[i] = qword;
 	}
 
 	dest_bytes += qwords * 8;
