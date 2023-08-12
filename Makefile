@@ -3,7 +3,7 @@ TARGET ?= x86_64
 CFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -O3 -lgcc \
 			-Isrc -Isrc/include -pedantic --std=c++20 \
-			-D ARCH_$(TARGET) -c -r
+			-D ARCH_$(TARGET) -c -r -mcmodel=large -fPIE
 
 ASFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -O3 -lgcc \
@@ -11,8 +11,8 @@ ASFLAGS = 	-ffreestanding -Wall -Wextra \
 			-D ARCH_$(TARGET) -c -r
 
 LDFLAGS =	-m elf_$(TARGET) -T src/linker.ld -nostdlib \
-			-static -pie -z text -z max-page-size=0x1000 \
-			--no-dynamic-linker
+			-static -fPIE -z text -z max-page-size=0x1000 \
+			--no-dynamic-linker -shared
 
 CXX = build/toolchain/bin/$(TARGET)-elf-g++
 CC = build/toolchain/bin/$(TARGET)-elf-gcc
@@ -30,7 +30,7 @@ complete: toolchain kernel image
 	echo "Starting complete rebuild..."
 
 run:
-	qemu-system-x86_64 -drive format=raw,file=build/cobalt.img
+	qemu-system-x86_64 -drive format=raw,file=build/cobalt.img -d int
 
 install:
 	# "WARNING: This automated LOCAL installation requires both a very specific system configuration and root access."
@@ -49,12 +49,17 @@ install:
 		echo "Aborting..."; \
 	fi
 
-kernel: build/kernel/init/main.o build/kernel/include/string.o
+kernel: build/kernel/init/main.o build/kernel/kernel.o build/kernel/include/string.o
 	echo $@
 	echo "Copying linker script..."
 	cp src/linker.ld build/kernel/linker.ld
 	echo "Linking kernel..."
 	$(LD) $(LDFLAGS) -o build/kernel/cobalt $^
+
+build/kernel/kernel.o: src/kernel.cpp
+	echo $@
+	mkdir -p build/kernel
+	$(CXX) -o $@ $< $(CFLAGS)
 
 build/kernel/init/main.o: src/init/main.cpp
 	echo $@
