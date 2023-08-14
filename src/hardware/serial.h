@@ -119,6 +119,8 @@ namespace Cobalt::Hardware {
 					return;
 				}
 
+				// FIXME: This isn't very clean right now, but it works.
+
 				this->write((binary >> 63 & 1) ? '1' : '0');
 				this->write((binary >> 62 & 1) ? '1' : '0');
 				this->write((binary >> 61 & 1) ? '1' : '0');
