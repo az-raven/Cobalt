@@ -7,6 +7,6 @@ using Cobalt::Graphics::Bitmap;
 namespace Cobalt::Graphics {
 	class Font {
 		public:
-			virtual Bitmap get(char c) { };
+			virtual Bitmap get(char _) = 0;
 	};
 }
