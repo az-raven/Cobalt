@@ -39,11 +39,6 @@ static volatile struct limine_memmap_request memmap_request = {
     .revision = 0
 };
 
-static volatile struct limine_kernel_address_request kernel_address_request = {
-    .id = LIMINE_KERNEL_ADDRESS_REQUEST,
-    .revision = 0
-};
-
 void wait_a_sec() {
     for (size_t i = 0; i < 10000000000000000; i++) {
         asm volatile("nop");
