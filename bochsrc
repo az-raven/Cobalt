@@ -7,6 +7,7 @@ clock: sync=realtime, time0=local
 boot: c
 
 log: ./build/bochs.log
+com1: enabled=1, mode=file, dev=build/cobalt_serial.log
 
 mouse: enabled=0
 magic_break: enabled=1

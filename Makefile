@@ -3,7 +3,9 @@ TARGET ?= x86_64
 CFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -O3 -lgcc \
 			-Isrc -Isrc/include -pedantic --std=c++20 \
-			-D ARCH_$(TARGET) -c -r -mcmodel=large -fPIE
+			-D ARCH_$(TARGET) -c -fPIE \
+			-mno-red-zone -fmacro-prefix-map=$(shell pwd)=/ \
+			-fPIC -mcmodel=large
 
 ASFLAGS = 	-ffreestanding -Wall -Wextra \
 			-fno-rtti -fno-exceptions -nostdlib -O3 -lgcc \
@@ -11,8 +13,8 @@ ASFLAGS = 	-ffreestanding -Wall -Wextra \
 			-D ARCH_$(TARGET) -c -r
 
 LDFLAGS =	-m elf_$(TARGET) -T src/linker.ld -nostdlib \
-			-static -fPIE -z text -z max-page-size=0x1000 \
-			--no-dynamic-linker -shared
+			-static -pie -z max-page-size=0x1000 \
+			--no-dynamic-linker -shared -Bsymbolic -Bstatic
 
 CXX = build/toolchain/bin/$(TARGET)-elf-g++
 CC = build/toolchain/bin/$(TARGET)-elf-gcc
@@ -30,7 +32,7 @@ complete: toolchain kernel image
 	echo "Starting complete rebuild..."
 
 run:
-	qemu-system-x86_64 -drive format=raw,file=build/cobalt.img
+	qemu-system-$(TARGET) -drive format=raw,file=build/cobalt.img -serial mon:stdio -m 1G
 
 bochs:
 	bochs
@@ -52,7 +54,8 @@ install:
 		echo "Aborting..."; \
 	fi
 
-kernel: build/kernel/init/main.o build/kernel/kernel.o build/kernel/include/string.o
+kernel: build/kernel/init/main.o build/kernel/kernel.o build/kernel/include/string.o \
+		# build/kernel/init/init_arena.o
 	echo $@
 	echo "Copying linker script..."
 	cp src/linker.ld build/kernel/linker.ld
@@ -73,6 +76,11 @@ build/kernel/include/string.o: src/include/string.cpp
 	echo $@
 	mkdir -p build/kernel/include
 	$(CXX) -o $@ $< $(CFLAGS)
+
+# build/kernel/init/init_arena.o: src/init/init_arena.s
+# 	echo $@
+# 	mkdir -p build/kernel/init
+# 	$(AS) -o $@ $< $(ASFLAGS)
 
 image:
 	echo $@
