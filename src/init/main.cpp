@@ -212,12 +212,6 @@ void _start(void) {
 
     IDT.load();
 
-    debugln("init", "Haven't loaded IDT, attempting to run Kernel::main().");
-
-    serial_port.puts("[init] Address of Kernel::main(): 0x");
-    serial_port.putd_hex((uint64_t)main);
-    serial_port.puts(".\n\r");
-
     debugln("init", "Calling...");
     main();
 
