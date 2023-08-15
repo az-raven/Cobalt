@@ -40,6 +40,8 @@ SECTIONS
 		*(COMMON)
 	} :data
 
+	KERNEL_END = .;
+
 	/DISCARD/ : {
 		*(.eh_frame)
 		*(.note .note.*)

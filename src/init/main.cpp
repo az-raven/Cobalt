@@ -19,6 +19,7 @@
 
 #include <util/debug.h>
 
+#include <mm/info.h>
 
 using Cobalt::Arch::Interrupts::fixme_irq_nop;
 using Cobalt::Arch::Interrupts::InterruptDescriptorTable;
@@ -28,6 +29,7 @@ using Cobalt::Graphics::Fonts::Basic8x8Mono;
 using Cobalt::Hardware::SerialPort;
 using Cobalt::Kernel::main;
 using Cobalt::Utility::Option;
+using namespace Cobalt::Memory::Info;
 
 #pragma GCC diagnostic push
 // NOTE: `response` is intentionally uninitialized, as Limine will set it.
@@ -212,6 +214,10 @@ void _start(void) {
     } else {
         serial_port.puts("No memory map info from Limine.\n\r");
     }
+
+    serial_port.puts("Kernel end address is at 0x");
+    serial_port.putd_hex((uint64_t)&KERNEL_END);
+    serial_port.puts("\n\r");
 
     IDT.load();
 
