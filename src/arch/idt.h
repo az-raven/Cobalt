@@ -4,21 +4,6 @@
 #include <hardware/serial.h>
 #include <util/debug.h>
 
-#define add_interrupt(num) \
-	idt.entries[num] = { \
-		.offset_low = (uint16_t)((uint64_t)interrupt_##num & 0xFFFF), \
-		.segment_selector = 0x28, \
-		.interrupt_stack_table_offset = 0, \
-		.reserved_1 = 0, \
-		.gate_type = 0b1110, \
-		.reserved_2 = 0, \
-		.descriptor_privilege_level = 0, \
-		.present = 1, \
-		.offset_middle = (uint16_t)(((uint64_t)interrupt_##num >> 16) & 0xFFFF), \
-		.offset_high = (uint32_t)(((uint64_t)interrupt_##num >> 32) & 0xFFFFFFFF), \
-		.reserved_3 = 0 \
-	}
-
 namespace Cobalt::Arch::Interrupts {
 	typedef __attribute__((packed)) struct {
 		uint16_t offset_low 					:16;
