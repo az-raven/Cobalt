@@ -29,15 +29,23 @@ using Cobalt::Hardware::SerialPort;
 using Cobalt::Kernel::main;
 using Cobalt::Utility::Option;
 
+#pragma GCC diagnostic push
+// NOTE: `response` is intentionally uninitialized, as Limine will set it.
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 static volatile struct limine_framebuffer_request framebuffer_request = {
     .id = LIMINE_FRAMEBUFFER_REQUEST,
     .revision = 0
 };
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+// NOTE: `response` is intentionally uninitialized, as Limine will set it.
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 static volatile struct limine_memmap_request memmap_request = {
     .id = LIMINE_MEMMAP_REQUEST,
     .revision = 0
 };
+#pragma GCC diagnostic pop
 
 void wait_a_sec() {
     for (size_t i = 0; i < 10000000000000000; i++) {
