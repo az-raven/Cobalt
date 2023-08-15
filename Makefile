@@ -55,7 +55,7 @@ install:
 	fi
 
 kernel: build/kernel/init/main.o build/kernel/kernel.o build/kernel/include/string.o \
-		# build/kernel/init/init_arena.o
+		build/kernel/graphics/splash/splash_screen.o
 	echo $@
 	echo "Copying linker script..."
 	cp src/linker.ld build/kernel/linker.ld
@@ -77,10 +77,10 @@ build/kernel/include/string.o: src/include/string.cpp
 	mkdir -p build/kernel/include
 	$(CXX) -o $@ $< $(CFLAGS)
 
-# build/kernel/init/init_arena.o: src/init/init_arena.s
-# 	echo $@
-# 	mkdir -p build/kernel/init
-# 	$(AS) -o $@ $< $(ASFLAGS)
+build/kernel/graphics/splash/splash_screen.o: src/graphics/splash/splash_screen.cpp
+	echo $@
+	mkdir -p build/kernel/graphics/splash
+	$(CXX) -o $@ $< $(CFLAGS)
 
 image:
 	echo $@

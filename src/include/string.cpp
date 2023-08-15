@@ -1,4 +1,5 @@
 #include "string.h"
+#include <util/todo.h>
 
 extern "C" inline
 void *memcpy(void *dest, const void *src, size_t n) {
@@ -134,4 +135,15 @@ int memcmp(const void *s1, const void *s2, size_t n) {
     }
  
     return 0;
+}
+
+extern "C"
+size_t strlen(const char *str) {
+	size_t i = 0;
+
+	while (str[i] != '\0') {
+		i++;
+	}
+
+	return i;
 }

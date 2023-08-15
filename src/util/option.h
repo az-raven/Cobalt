@@ -17,7 +17,7 @@ namespace Cobalt::Utility {
 				// FIXME: There's probably a better way to handle
 				//        this.
 				if (!this->_has_value)
-					TODO("Attempted to get value from an empty option - this should fault somehow.");
+					TODO();
 				return this->_value;
 			}
 

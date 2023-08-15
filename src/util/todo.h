@@ -1,6 +1,6 @@
 #pragma once
 
-#define TODO(what)                                                     \
+#define TODO()                                                     	   \
 	do {                                                               \
 			asm("cli; hlt;");								   		   \
 	} while (true)

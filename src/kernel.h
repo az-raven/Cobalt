@@ -1,7 +1,7 @@
 #pragma once
 
 #include <util/option.h>
-#include <hardware/framebuffer.h>
+#include <graphics/framebuffer.h>
 
 using Cobalt::Utility::Option;
 using Cobalt::Graphics::Framebuffer;
