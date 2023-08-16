@@ -168,13 +168,18 @@ void _start(void) {
         serial_port.puts("No memory map info from Limine.\n\r");
     }
 
+    splash.update_status("MEMORY CHECK OK!");
+
     serial_port.puts("Kernel end address is at 0x");
     serial_port.putd_hex((uint64_t)&KERNEL_END);
     serial_port.puts("\n\r");
 
     IDT.load();
 
+    splash.update_status("IDT LOADED OK!");
+
     debugln("init", "Calling...");
+    splash.update_status("STARTING KERNEL!");
     main();
 
     // NOTE: Unreachable.
