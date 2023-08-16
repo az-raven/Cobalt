@@ -50,7 +50,7 @@ namespace Cobalt::Graphics {
 
 		this->_framebuffer.rect(
 			Coordinate(0, y_offset + 360),
-			Coordinate(this->_framebuffer.width(), y_offset + 360 + 50),
+			Coordinate(this->_framebuffer.width(), y_offset + 360 + 84),
 			0x00'FF0000
 		);
 
