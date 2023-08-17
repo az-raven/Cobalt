@@ -4,9 +4,6 @@ build/
 # IDE
 .vscode/
 
-# Security-related headers
-SECURITY.h
-
 # Emulator artifacts
 bx_enh_dbg.ini
 **/*.log
